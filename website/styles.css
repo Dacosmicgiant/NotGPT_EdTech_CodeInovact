@@ -1,0 +1,75 @@
+/* Reset some default styles */
+body, h1, p {
+  margin: 0;
+  padding: 0;
+}
+
+/* Basic styling */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #8194FA;
+}
+
+.logo img {
+  max-height: 40px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+
+nav li {
+  margin-right: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  padding: 40px;
+}
+
+.text {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.text h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.image img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  header {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .logo {
+      margin-bottom: 10px;
+  }
+
+  .content {
+      flex-direction: column;
+      padding: 20px;
+  }
+
+  .text {
+      padding-right: 0;
+      margin-bottom: 20px;
+  }
+}
