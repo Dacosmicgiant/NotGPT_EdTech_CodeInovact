@@ -11,14 +11,14 @@ Problem statement:
 - Maximizing productivity and marks obtained by covering maximum data in minimum time.
 
 How it works(Algorithm):
-Step-1: User enters qualification. \n
-Step-2: Challenge based evaluation of user. \n
-Step-3: Difficulty assigned to subject based on results. \n
-Step-4: Get daily time available for user. \n
-Step-5: Allot time for each subject based on difficulty faced by user and available time.(In ratios) \n
-Step-6: Wait for checkboxes. \n
-Step-7: Based on complete/incomplete update time. \n
-Step-8: If complete congratulate user and clear tasks.\n
-Step-8: Goto step-5 \n
+1. User enters qualification.
+2. Challenge based evaluation of user.
+3. Difficulty assigned to subject based on results.
+4. Get daily time available for user.
+5. Allot time for each subject based on difficulty faced by user and available time.(In ratios)
+6. Wait for checkboxes.
+7. Based on complete/incomplete update time.
+8. If complete congratulate user and clear tasks.
+9. Goto step-5
 
 If working on localhost: Download entire directory and run test.html
