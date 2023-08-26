@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Schedule Generator</title>
+    <style>
+        /* Reset some default styles to ensure consistency */
+        body, h1, p, label, input, button {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+    
+        /* Style the body with a background color */
+        body {
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+    
+        /* Style the heading */
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    
+        /* Style the input form */
+        #input-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        }
+    
+        /* Style labels for input fields */
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+    
+        /* Style input fields */
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+    
+        /* Style the button */
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    
+        /* Add some hover effect to the button */
+        button:hover {
+            background-color: #0056b3;
+        }
+    
+        /* Style the output section */
+        #output {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        }
+    
+        /* Style the output headings */
+        #output h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+    
+        /* Style the individual study schedule items */
+        #output p {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+    
+        /* Style the study day headers */
+        #output p strong {
+            font-weight: bold;
+        }
+    </style>
+    
+</head>
+<body>
+    <h1>Study Schedule Generator</h1>
+
+    <div id="input-form">
+        <label for="topics">Enter Topics (comma-separated):</label>
+        <input type="text" id="topics" placeholder="Topic A, Topic B, Topic C, ..."><br><br>
+
+        <label for="difficulty">Enter Difficulty Levels (comma-separated):</label>
+        <input type="text" id="difficulty" placeholder="easy, medium, hard, ..."><br><br>
+
+        <label for="time-estimates">Enter Time Estimates (comma-separated in hours):</label>
+        <input type="text" id="time-estimates" placeholder="2, 3, 1, ..."><br><br>
+
+        <label for="total-time">Enter Total Study Time (in hours):</label>
+        <input type="text" id="total-time" placeholder="10"><br><br>
+
+        <label for="max-daily-time">Enter Max Daily Study Time (in hours):</label>
+        <input type="text" id="max-daily-time" placeholder="3"><br><br>
+
+        <label for="break-time">Enter Break Time Between Study Days (in hours):</label>
+        <input type="text" id="break-time" placeholder="1"><br><br>
+
+        <button onclick="generateSchedule()">Generate Study Schedule</button>
+    </div>
+
+    <div id="output">
+        <!-- Study schedule results will be displayed here -->
+    </div>
+
+    <script>
+        function generateSchedule() {
+            const topicsInput = document.getElementById("topics").value;
+            const difficultyInput = document.getElementById("difficulty").value;
+            const timeEstimatesInput = document.getElementById("time-estimates").value;
+            const totalStudyTimeInput = parseFloat(document.getElementById("total-time").value);
+            const maxDailyStudyTimeInput = parseFloat(document.getElementById("max-daily-time").value);
+            const breakTimeInput = parseFloat(document.getElementById("break-time").value);
+
+            const topics = topicsInput.split(",").map(topic => topic.trim());
+            const difficultyLevels = difficultyInput.split(",").map(level => level.trim());
+            const timeEstimates = timeEstimatesInput.split(",").map(estimate => parseFloat(estimate.trim()));
+
+            const studySchedule = prioritizeAndGenerateSchedule(topics, difficultyLevels, timeEstimates, totalStudyTimeInput, maxDailyStudyTimeInput, breakTimeInput);
+
+            // Display the study schedule results on the webpage
+            const outputDiv = document.getElementById("output");
+            outputDiv.innerHTML = "<h2>Study Schedule:</h2>";
+
+            studySchedule.forEach((studyDay, dayIndex) => {
+                const dayTopics = studyDay.map(({ topic, time, difficulty }) => `${topic} (${time.toFixed(2)} hrs, ${difficulty})`);
+                const dayString = dayTopics.join(", ");
+                outputDiv.innerHTML += `<p><strong>Day ${dayIndex + 1}:</strong> Study ${dayString}</p>`;
+            });
+        }
+
+    //    function prioritizeAndGenerateSchedule(topics, difficultyLevels, timeEstimates, totalStudyTime, maxDailyStudyTime, breakTime) {
+            // Implement your prioritizeTopics and generateFullCoverageScheduleSplit functions here
+            // Ensure that this function returns an array of objects like: [{ topic: "Topic A", time: 2, difficulty: "easy" }, ...]
+     //       const studySchedule = []; // Replace this with the actual schedule generation logic
+       //     return studySchedule;
+      //  }
+
+        function prioritizeAndGenerateSchedule(topics, difficultyLevels, timeEstimates, totalStudyTime, maxDailyStudyTime, breakTime) {
+    const studySchedule = [];
+
+    // Create an array of objects with topics, time estimates, and difficulty levels
+    const topicData = topics.map((topic, index) => ({
+        topic,
+        time: timeEstimates[index],
+        difficulty: difficultyLevels[index]
+    }));
+
+    // Sort topics by difficulty (you can implement a more sophisticated prioritization logic here)
+    topicData.sort((a, b) => {
+        const difficultyOrder = { "easy": 1, "medium": 2, "hard": 3 };
+        return difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
+    });
+
+    // Generate the study schedule based on priorities and constraints
+    while (totalStudyTime > 0) {
+        const studyDay = [];
+        let remainingTimeToday = maxDailyStudyTime;
+
+        for (const topicInfo of topicData) {
+            if (remainingTimeToday >= topicInfo.time && totalStudyTime >= topicInfo.time) {
+                studyDay.push({ topic: topicInfo.topic, time: topicInfo.time, difficulty: topicInfo.difficulty });
+                remainingTimeToday -= topicInfo.time;
+                totalStudyTime -= topicInfo.time;
+            } else if (remainingTimeToday > 0 && totalStudyTime > 0) {
+                studyDay.push({ topic: topicInfo.topic, time: Math.min(remainingTimeToday, totalStudyTime), difficulty: topicInfo.difficulty });
+                topicInfo.time -= Math.min(remainingTimeToday, totalStudyTime);
+                totalStudyTime -= Math.min(remainingTimeToday, totalStudyTime);
+                break;
+            }
+        }
+
+        if (studyDay.length > 0) {
+            studySchedule.push(studyDay);
+        }
+
+        if (totalStudyTime > 0) {
+            totalStudyTime -= breakTime;
+        }
+    }
+
+    return studySchedule;
+}
+
+    </script>
+</body>
+</html>
