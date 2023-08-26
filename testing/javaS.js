@@ -19,15 +19,11 @@ document.addEventListener("DOMContentLoaded", function() {
             <p><strong>Name:</strong> ${name}</p>
             <p><strong>Email:</strong> ${email}</p>
             <p><strong>Qualification:</strong> ${qualificationLabel}</p>
-            <p><strong>Subjects:</strong> ${subjectsArray.join(' ')}</p>
+            <p><strong>Subjects:</strong> ${subjectsArray.join(', ')}</p>
         `;
 
         userDataForm.reset();
     });
-
-   /* subjectForm.addEventListener("submit", function(event) {
-        event.preventDefault();
-    }); */
 
     function getValueById(id) {
         return document.getElementById(id).value;
