@@ -3,46 +3,330 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>User Data Form</title>
+    <title>Study Schedule Generator</title>
+    <style>
+      body, h1, p, label, input, button, select {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Style the body with a background color */
+body {
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+/* Style the heading */
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+/* Style the input form */
+#studyForm {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Style labels for input fields */
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* Style input fields */
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Add a focus effect for input fields */
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Style the "Add Topic" button */
+#addTopicButton, #generateButton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    background-image: linear-gradient(to bottom, #007bff, #0056b3);
+}
+
+/* Add a hover effect for buttons */
+#addTopicButton:hover, #generateButton:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Style the output section */
+#output {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    color: #333;
+}
+
+/* Style the output headings */
+#output h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Style the individual study schedule items */
+#output p {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* Style the study day headers */
+#output p strong {
+    font-weight: bold;
+    color: #007bff;
+}
+
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px; /* Rounded corners */
+    background-image: linear-gradient(to bottom, #007bff, #0056b3); /* Gradient background */
+}
+
+/* Add a hover effect for the button */
+input[type="submit"]:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+
+/* Style the entire page with a background image and rounded corners */
+html, body {
+    height: 100%;
+}
+
+body {
+    background-image: url('your-background-image.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    border-radius: 15px;
+    padding: 20px;
+    color: #333;
+}
+
+    </style>
+
 </head>
 <body>
-    <div class="container">
-        <h1>User Data Form</h1>
-        <form id="userDataForm" action="C:\Users\Vedant Vankar\Desktop\sem-3\Hackathon\submit.php" method="post">
-            <label for="name">Name:</label>
-            <input type="text" id="name" required>
-            
-            <label for="email">Email:</label>
-            <input type="email" id="email" required>
+    <h1>Study Schedule Generator</h1>
+    
+    <form id="studyForm">
+        <label for="topics">Topics:</label>
+        <input type="text" id="topicInput" >
+        
+        <label for="timeEstimates">Time Estimate (hours):</label>
+        <input type="number" id="timeEstimateInput">
+        
+        <label for="difficultyLevels">Difficulty Level:</label>
+        <select id="difficultyLevelInput">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+        
+        <button type="button" id="addTopicButton">Add Topic</button>
+        <ul id="topicList"></ul>
+        
+        <label for="totalStudyTime">Total Study Time (hours):</label>
+        <input type="number" id="totalStudyTime" name="totalStudyTime" required>
+        
+        <label for="maxDailyStudyTime">Max Daily Study Time (hours):</label>
+        <input type="number" id="maxDailyStudyTime" name="maxDailyStudyTime" required>
+        
+        <label for="breakTime">Break Time (hours):</label>
+        <input type="number" id="breakTime" name="breakTime" required>
+        
+        <input type="submit" value="Generate Schedule">
+    </form>
 
-            <h2>User Qualification</h2>
-            <label for="qualification">Select Qualification:</label>
-            <select id="qualification" required>
-                <option value="">Select...</option>
-                <option value="high-school">High School</option>
-                <option value="bachelors">Bachelor's Degree</option>
-                <option value="masters">Master's Degree</option>
-                <option value="phd">Ph.D.</option>
-                <option value="other">Other</option>
-            </select>
-            
-            <h2>Subjects</h2>
-            <form id="subjectForm">
-                <label for="subjectInput">Enter subjects (comma-separated):</label>
-                <input type="text" id="subjectInput" required>
-                <button type="submit">Submit Subjects</button>
-            </form>
+    <h2>Generated Schedule:</h2>
+    <div id="output"></div>
 
-            <div id="subjectList"></div>
+    <script>
+        const topicList = document.getElementById("topicList");
+        const addTopicButton = document.getElementById("addTopicButton");
+        const studyForm = document.getElementById("studyForm");
+
+        addTopicButton.addEventListener("click", function() {
+            const topicInput = document.getElementById("topicInput");
+            const timeEstimateInput = document.getElementById("timeEstimateInput");
+            const difficultyLevelInput = document.getElementById("difficultyLevelInput");
+
+            const topic = topicInput.value.trim();
+            const timeEstimate = parseFloat(timeEstimateInput.value);
+            const difficultyLevel = difficultyLevelInput.value;
+
+            if (topic && !isNaN(timeEstimate) && timeEstimate > 0) {
+                const listItem = document.createElement("li");
+                listItem.textContent = `Topic: ${topic}, Time Estimate: ${timeEstimate} hours, Difficulty: ${difficultyLevel}`;
+                topicList.appendChild(listItem);
+
+                // Clear input fields
+                topicInput.value = "";
+                timeEstimateInput.value = "";
+                difficultyLevelInput.value = "easy";
+            }
+        });
+
+        studyForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const topics = [];
+            const timeEstimates = [];
+            const difficultyLevels = [];
+            const topicItems = topicList.querySelectorAll("li");
+
+            topicItems.forEach(item => {
+                const parts = item.textContent.split(",");
+                const topic = parts[0].split(":")[1].trim();
+                const timeEstimate = parseFloat(parts[1].split(":")[1].trim().split(" ")[0]);
+                const difficultyLevel = parts[2].split(":")[1].trim();
+
+                topics.push(topic);
+                timeEstimates.push(timeEstimate);
+                difficultyLevels.push(difficultyLevel);
+            });
+
+            const totalStudyTime = parseFloat(document.getElementById("totalStudyTime").value);
+            const maxDailyStudyTime = parseFloat(document.getElementById("maxDailyStudyTime").value);
+            const breakTime = parseFloat(document.getElementById("breakTime").value);
+
+            const schedule = generateFullCoverageScheduleSplit(topics, timeEstimates, totalStudyTime, maxDailyStudyTime, breakTime, difficultyLevels);
+
+            // Format and display the schedule
+            const outputElement = document.getElementById("output");
+            outputElement.innerHTML = "";
+
+            for (let day = 0; day < schedule.length; day++) {
+                const daySchedule = schedule[day];
+                const dayHeader = document.createElement("h3");
+                dayHeader.textContent = `Day ${day + 1}`;
+                outputElement.appendChild(dayHeader);
+
+                const dayList = document.createElement("ul");
+                for (let i = 0; i < daySchedule.length; i++) {
+                    const [topic, time] = daySchedule[i];
+                    const listItem = document.createElement("li");
+                    listItem.textContent = `${topic}: ${time} hours`;
+                    dayList.appendChild(listItem);
+                }
+                outputElement.appendChild(dayList);
+            }
+        });
+
+        function prioritizeTopics(topics, difficultyLevels, totalStudyTime) {
+    const easyCount = difficultyLevels.filter(level => level === "easy").length;
+    const mediumCount = difficultyLevels.filter(level => level === "medium").length;
+    const hardCount = difficultyLevels.filter(level => level === "hard").length;
+    
+    const n = easyCount + 2 * mediumCount + 3 * hardCount;
+    
+    const easyTime = (easyCount * 1 / n) * totalStudyTime;
+    const mediumTime = (mediumCount * 2 / n) * totalStudyTime;
+    const hardTime = (hardCount * 3 / n) * totalStudyTime;
+    
+    const priorities = {};
+    
+    for (let i = 0; i < topics.length; i++) {
+        const topic = topics[i];
+        const difficulty = difficultyLevels[i];
+        if (difficulty === "easy") {
+            priorities[topic] = easyTime;
+        } else if (difficulty === "medium") {
+            priorities[topic] = mediumTime;
+        } else {  // "hard"
+            priorities[topic] = hardTime;
+        }
+    }
+    
+    const prioritizedTopics = Object.keys(priorities).sort((a, b) => priorities[b] - priorities[a]);
+    return prioritizedTopics;
+}
+
+function generateFullCoverageScheduleSplit(topics, timeEstimates, totalStudyTime, maxDailyStudyTime, breakTime, difficultyLevels) {
+    const prioritizedTopics = prioritizeTopics(topics, difficultyLevels, totalStudyTime);
+    const studySchedule = [];
+    
+    while (totalStudyTime > 0 && prioritizedTopics.length > 0) {
+        let remainingTimeToday = Math.min(maxDailyStudyTime, totalStudyTime);
+        const studyDay = [];
+        
+        while (remainingTimeToday > 0 && prioritizedTopics.length > 0) {
+            const topicInfo = prioritizedTopics[0];
+            let topic, topicEstimate;
+            if (Array.isArray(topicInfo)) {
+                [topic, topicEstimate] = topicInfo;
+            } else {
+                topic = topicInfo;
+                topicEstimate = timeEstimates[topics.indexOf(topic)];
+            }
             
-            <button type="submit">Submit User Data</button>
-            
-            <div id="output">
-                <!-- User data will be displayed here -->
-            </div>
-        </form>
-    </div>
-    <script src="javaS.js"></script>
+            if (topicEstimate <= remainingTimeToday) {
+                studyDay.push([topic, topicEstimate]);
+                remainingTimeToday -= topicEstimate;
+                totalStudyTime -= topicEstimate;
+                prioritizedTopics.shift();
+            } else {
+                if (remainingTimeToday > 0) {
+                    studyDay.push([topic, remainingTimeToday]);
+                    timeEstimates[topics.indexOf(topic)] -= remainingTimeToday;
+                    totalStudyTime -= remainingTimeToday;
+                    break;
+                }
+            }
+        }
+        
+        if (studyDay.length > 0) {
+            studySchedule.push(studyDay);
+        }
+        
+        if (prioritizedTopics.length > 0) {
+            totalStudyTime -= breakTime;
+        }
+    }
+    
+    return studySchedule;
+}
+    
+    </script>
 </body>
 </html>
