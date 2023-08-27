@@ -176,6 +176,19 @@ button:hover{
       text-align: center;
   }
 
+  h1{
+    font-size: 16px;
+  }
+  h2{
+    font-size: 14px;
+  }
+  p{
+    font-size: 12px;
+  }
+  li{
+    font-size: 14px;
+  }
+
   .logo {
       margin-bottom: 10px;
   }
