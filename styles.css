@@ -176,30 +176,49 @@ button:hover{
       text-align: center;
   }
 
-  h1{
+  .text1 h1 {
+    font-size: 18px;
+  
+    margin-bottom: 10px;
+  }
+  .text1 h2 {
     font-size: 16px;
+    color: whitesmoke;
+    
   }
-  h2{
-    font-size: 14px;
+  .text1 p {
+    font-size: 28px;
+    color: whitesmoke;
+    
   }
-  p{
+
+  .text1 ul{
+    font-family: "Montserrat", sans-serif;
+    
     font-size: 12px;
+    text-decoration: none;
   }
-  li{
-    font-size: 14px;
+  
+  .text ul{
+    font-size: 12px;
+    text-decoration: none;
   }
-
-  .logo {
-      margin-bottom: 10px;
+  
+  .text h1 {
+    font-size: 18px;
+    color: #0E1315;
+    margin-bottom: 10px;
   }
-
-  .content {
-      flex-direction: column;
-      padding: 20px;
+  
+  .text p {
+    font-size: 12px;
+    margin-bottom: 10px;
   }
-
-  .text {
-      padding-right: 0;
-      margin-bottom: 20px;
+  .text h2 {
+    font-size: 16px;
+    color: #0E1315;
+    margin-bottom: 10px;
   }
+  
+  
 }
