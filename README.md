@@ -1,4 +1,5 @@
 # NotGPT_EdTech_CodeInovact
+website-link: https://priorityscheduler.netlify.app/
 
 Team members:
 1. Vedant Vankar
@@ -14,7 +15,7 @@ How it works:
 1. Accept the subjects the user wants to study
 2. Accept how difficult the subjects are for them.
 3. Get the deadline.
-4. Use relative priority index.
+4. Use customized relative importance index formula.
 5. Allot time for each subject based on difficulty faced by user and available time.(In ratios)
 
 If working on localhost: Download entire directory and run test.html
