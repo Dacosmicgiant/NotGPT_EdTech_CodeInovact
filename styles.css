@@ -219,6 +219,24 @@ button:hover{
     color: #0E1315;
     margin-bottom: 10px;
   }
-  
+
+  .content{
+    word-wrap: break-word;
+  }
+  .content ul{
+    font-size: 12px;
+  }
+
+  .content h1{
+    font-size: 18px;
+  }
+
+  .content p{
+    font-size: 12px;
+  }
+
+  .content h2{
+    font-size: 16px;
+  }
   
 }
