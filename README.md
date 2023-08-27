@@ -18,4 +18,4 @@ How it works:
 4. Use customized relative importance index formula.
 5. Allot time for each subject based on difficulty faced by user and available time.(In ratios)
 
-If working on localhost: Download entire directory and run test.html
+If working on localhost: Download entire directory and run home.html
